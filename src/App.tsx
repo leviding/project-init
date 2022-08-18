@@ -1,9 +1,10 @@
 import React from 'react';
 import './index.scss';
 
-const App = (props) => {
-  const {} = props;
-  return <div className='wrapper'>This is App</div>;
+const App = () => {
+  const content = 'This is App';
+
+  return <div className='wrapper'>{content}</div>;
 };
 
 export default App;

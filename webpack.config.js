@@ -9,21 +9,21 @@ module.exports = {
   mode: devMode ? 'development' : 'production',
   devtool: 'eval-cheap-module-source-map',
   entry: {
-    index: ['./src/index.tsx'],
+    index: ['./src/index.tsx']
   },
   output: {
     filename: devMode ? '[name].js' : '[name].min.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true,
+    clean: true
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
   },
   devServer: {
     static: './dist',
     open: true,
     port: 'auto',
-    hot: true,
+    hot: true
     // proxy:
   },
   module: {
@@ -32,8 +32,8 @@ module.exports = {
         test: /\.(tsx|ts|jsx|js)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-        },
+          loader: 'babel-loader'
+        }
       },
       {
         test: /\.css$/,
@@ -42,11 +42,11 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1,
-            },
+              importLoaders: 1
+            }
           },
-          'postcss-loader',
-        ],
+          'postcss-loader'
+        ]
       },
       {
         test: /\.s[ac]ss$/i,
@@ -55,36 +55,31 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 2,
-            },
+              importLoaders: 2
+            }
           },
           'postcss-loader',
-          'sass-loader',
-        ],
+          'sass-loader'
+        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
         // More information here https://webpack.js.org/guides/asset-modules/
-        type: 'asset',
-      },
-    ],
+        type: 'asset'
+      }
+    ]
   },
   optimization: {
     minimizer: [new CssMinimizerPlugin()],
-    usedExports: true,
+    usedExports: true
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'static/template.html',
+      template: 'static/template.html'
     }),
-  ].concat(
-    devMode
-      ? []
-      : [
-          new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[name].chunk.css',
-          }),
-        ]
-  ),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[name].chunk.css'
+    })
+  ]
 };
