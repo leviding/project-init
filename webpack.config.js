@@ -12,7 +12,7 @@ module.exports = {
     index: ['./src/index.tsx']
   },
   output: {
-    filename: devMode ? '[name].js' : '[name].min.js',
+    filename: devMode ? './js/[name].[chunkhash].js' : './js/[name].[chunkhash].min.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true
   },
@@ -65,7 +65,10 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
         // More information here https://webpack.js.org/guides/asset-modules/
-        type: 'asset'
+        type: 'asset',
+        generator: {
+          filename: './images/[name][ext]',
+        },
       }
     ]
   },
@@ -75,11 +78,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'static/template.html'
+      template: './static/template.html'
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[name].chunk.css'
+      filename: './css/[name].[contenthash].css',
+      chunkFilename: './css/[name].[contenthash].chunk.css'
     })
   ]
 };
